@@ -6,7 +6,7 @@ object Utils {
         val firstName = parts?.getOrNull(0)
         val lastName = parts?.getOrNull(1)
 
-        return firstName to lastName
+        return (firstName ?: "") to (lastName ?: "")
     }
 
     fun transliteration(payload: String, divider:String = " ") :String{
