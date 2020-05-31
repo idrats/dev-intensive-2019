@@ -39,13 +39,13 @@ fun Date.humanizeDiff(): String {
 
     return when (val diff = Date().time - this.time) {
         in 0..SECOND -> "только что"
-        in SECOND + 1..SECOND * 45 -> "несколько секунд назад"
-        in SECOND * 45 + 1..SECOND * 75 -> "минуту назад"
-        in SECOND * 75 + 1..MINUTE * 45 -> "${diff / MINUTE} минут назад"
-        in MINUTE * 45 + 1..MINUTE * 75 -> "час назад"
-        in MINUTE * 75 + 1..HOUR * 22 -> "${diff / HOUR} часов назад"
-        in HOUR * 22 + 1..HOUR * 26 -> "день назад"
-        in HOUR * 26 + 1..DAY * 360 -> "${diff / DAY} дней назад"
+        in SECOND + 1..SECOND * 45 -> if (diff > 0) "несколько секунд назад" else "через несколько секунд"
+        in SECOND * 45 + 1..SECOND * 75 -> if (diff > 0) "минуту назад" else "через минуту"
+        in SECOND * 75 + 1..MINUTE * 45 -> if (diff > 0) "${diff / MINUTE} минут назад" else "через ${diff / MINUTE} минут"
+        in MINUTE * 45 + 1..MINUTE * 75 -> if (diff > 0) "час назад" else "через час"
+        in MINUTE * 75 + 1..HOUR * 22 -> if (diff > 0) "${diff / HOUR} часов назад" else "через ${diff / HOUR} часов"
+        in HOUR * 22 + 1..HOUR * 26 -> if (diff > 0) "день назад" else "через день"
+        in HOUR * 26 + 1..DAY * 360 -> if (diff > 0) "${diff / DAY} дней назад" else "через ${diff / DAY} дней"
 
         else -> "более года назад"
     }
