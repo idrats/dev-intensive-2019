@@ -10,10 +10,10 @@ object Utils {
     }
 
     fun transliteration(payload: String, divider:String = " ") :String{
-        return payload
+        return payload + divider
     }
 
     fun toInitials(firstName: String?, lastName: String?) : String {
-        return ""
+        return "${(firstName?.first()?.toUpperCase() ?: "")} ${lastName?.first()?.toUpperCase()}}"
     }
 }
